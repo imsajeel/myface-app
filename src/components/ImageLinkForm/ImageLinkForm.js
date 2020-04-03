@@ -2,9 +2,19 @@ import React from "react";
 
 const ImageLinkForm = () => {
   return (
-    <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-      <p className="f3 link dim black underline pa3 pointer">Sign Out</p>
-    </nav>
+    <div>
+      <p className="f3">
+        {"This magic brain will detect faces in your pictures. Give it a try"}
+      </p>
+      <div className="center">
+        <div className="pa4 br3 shadow-5">
+          <input className="f4 pa2 w-70 center" type="text" />
+          <button className="f4 w-30 link grow ph3 pv2 dib white bg-light-purple">
+            Detect
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

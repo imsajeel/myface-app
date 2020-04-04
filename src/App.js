@@ -5,6 +5,7 @@ import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
 import Rank from "./components/Rank/Rank";
 
 const app = new Clarifai.App({
@@ -40,7 +41,7 @@ class App extends Component {
 
     app.models
       .predict(
-        "a403429f2ddf4b49b307e318f00e528b",
+        Clarifai.COLOR_MODEL,
         "https://samples.clarifai.com/face-det.jpg"
       )
       .then(
@@ -64,9 +65,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        {/*
-      <FaceRecognition />
-       */}
+        <FaceRecognition />
       </div>
     );
   }

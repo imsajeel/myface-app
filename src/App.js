@@ -9,7 +9,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
 import Rank from "./components/Rank/Rank";
 
 const app = new Clarifai.App({
-  apiKey: "bcfde19fceff4a7b8d79b925589e36fc"
+  apiKey: "bcfde19fceff4a7b8d79b925589e36fc",
 });
 
 const particlesOptions = {
@@ -18,10 +18,10 @@ const particlesOptions = {
       value: 150,
       density: {
         enable: true,
-        value_area: 800
-      }
-    }
-  }
+        value_area: 800,
+      },
+    },
+  },
 };
 
 class App extends Component {
@@ -29,26 +29,29 @@ class App extends Component {
     super();
     this.state = {
       input: "",
-      imageUrl: ""
+      imageUrl: "",
+      box: {},
     };
   }
 
-  onInputChange = event => {
+  calculateFaceLocation = (data) => {
+    const clarifai = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById("inputimage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    console.log(width, height);
+  };
+
+  onInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
-      function(response) {
-        console.log(
-          response.outputs[0].data.regions[0].region_info.bounding_box
-        );
-      },
-      function(err) {
-        // there was an error
-      }
-    );
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .then((response) => this.calculateFaceLocation(response))
+      .catch((err) => console.log(err));
   };
 
   render() {

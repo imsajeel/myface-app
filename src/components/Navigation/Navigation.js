@@ -7,6 +7,12 @@ const Navigation = (onRouteChange) => {
         onClick={() => onRouteChange.onRouteChange("signin")}
         className="f3 link dim black underline pa3 pointer"
       >
+        Register
+      </p>
+      <p
+        onClick={() => onRouteChange.onRouteChange("Register")}
+        className="f3 link dim black underline pa3 pointer"
+      >
         Sign Out
       </p>
     </nav>
